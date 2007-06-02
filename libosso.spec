@@ -36,7 +36,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static liboss library.
+Static libosso library.
 
 %description static -l pl.UTF-8
 Statyczna biblioteka libosso.

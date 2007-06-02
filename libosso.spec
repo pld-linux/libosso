@@ -1,14 +1,13 @@
 #
-%define snap 12075
 Summary:	Maemo osso library
 Name:		libosso
-Version:	2.8
+Version:	1.20
 Release:	1
 License:	LGPL
 Group:		Development/Libraries
-Source0:	http://archive.ubuntu.com/ubuntu/pool/universe/libo/libosso/%{name}_%{version}-1ubuntu2.tar.gz
-# Source0-md5:	674c72cdae220156882d9cc7ec2253dd
-# Source0: https://stage.maemo.org/svn/maemo/projects/haf/trunk/libosso/
+Source0:	http://repository.maemo.org/pool/bora/free/source/%{name}_%{version}-1.tar.gz
+# Source0-md5:	6bb3f309371d398d321e52c9e52ca605
+Patch0:		%{name}-noWerror.patch
 URL:		http://maemo.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -44,6 +43,7 @@ Statyczna biblioteka libosso.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__glib_gettextize}
@@ -69,9 +69,23 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
+%{_sysconfdir}/dbus-1/system.d/libosso.conf
+%dir %{_sysconfdir}/libosso
+%{_sysconfdir}/libosso/sessionbus-libosso.conf
+%attr(755,root,root) %{_bindir}/dbus-launch-systembus.sh
+%attr(755,root,root) %{_bindir}/dbus-launch.sh
+%attr(755,root,root) %{_bindir}/osso-date
+%attr(755,root,root)    %{_libdir}/libosso.so.1.3.0
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/libosso.la
+%{_pkgconfigdir}/libosso.pc
+%{_includedir}/libosso.h
+%{_includedir}/log-functions.h
+%{_includedir}/osso-log.h
+%{_includedir}/osso-mem.h
 
 %files static
 %defattr(644,root,root,755)
+%{_libdir}/libosso.a

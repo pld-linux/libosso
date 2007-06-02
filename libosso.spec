@@ -80,6 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_libdir}/libosso.la
+%{_libdir}/libosso.so
 %{_pkgconfigdir}/libosso.pc
 %{_includedir}/libosso.h
 %{_includedir}/log-functions.h

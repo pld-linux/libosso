@@ -15,6 +15,7 @@ BuildRequires:	dbus-glib-devel >= 0.22
 BuildRequires:	glib2-devel >= 1:2.4.0
 BuildRequires:	libtool
 BuildRequires:	outo >= 0.1.1
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

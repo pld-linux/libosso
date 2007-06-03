@@ -1,5 +1,5 @@
-Summary:	Maemo osso library
-Summary(pl.UTF-8):	Biblioteka Maemo osso
+Summary:	OSSO Application Framework for Maemo
+Summary(pl.UTF-8):	Szkielet aplikacji OSSO dla Maemo
 Name:		libosso
 Version:	1.20
 Release:	1
@@ -7,29 +7,29 @@ License:	LGPL
 Group:		Libraries
 Source0:	http://repository.maemo.org/pool/bora/free/source/%{name}_%{version}-1.tar.gz
 # Source0-md5:	6bb3f309371d398d321e52c9e52ca605
-Patch0:		%{name}-noWerror.patch
+Patch0:		%{name}-opt.patch
 URL:		http://maemo.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	glib2-devel
-BuildRequires:	intltool
+BuildRequires:	dbus-glib-devel >= 0.22
+BuildRequires:	glib2-devel >= 1:2.4.0
 BuildRequires:	libtool
-BuildRequires:	mce-devel
-#BuildRequires:	python-devel
-#BuildRequires:	xulrunner-devel
+BuildRequires:	outo >= 0.1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-In-place editor library for the Maemo platform.
+D-Bus-related functionality for Maemo applications.
 
 %description -l pl.UTF-8
-Biblioteka edytora dla platformy Maemo.
+Funkcjonalność związana z D-Bus dla aplikacji Maemo.
 
 %package devel
 Summary:	Header files for libosso
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libosso
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	dbus-glib-devel >= 0.22
+Requires:	glib2-devel >= 1:2.4.0
 
 %description devel
 Header files for libosso.
@@ -54,7 +54,6 @@ Statyczna biblioteka libosso.
 %patch0 -p1
 
 %build
-%{__glib_gettextize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -76,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc ChangeLog README
 %attr(755,root,root) %{_bindir}/dbus-launch-systembus.sh
 %attr(755,root,root) %{_bindir}/dbus-launch.sh
 %attr(755,root,root) %{_bindir}/osso-date
